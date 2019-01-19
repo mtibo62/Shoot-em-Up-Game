@@ -10,7 +10,7 @@ public class enemy2 : MonoBehaviour
 
     public GameObject enemyBullet2;
 
-    public int bulletDelay;
+    private int bulletDelay = 6;
 
 
 
@@ -21,17 +21,22 @@ public class enemy2 : MonoBehaviour
 
         rb.velocity = Vector2.left * speed;
 
+        StartCoroutine(spawnBullet());
 
     }
 
     // Update is called once per frame
-    void Update()
+    IEnumerator spawnBullet()
     {
-        if (Time.time > bulletDelay)
+        yield return new WaitForSeconds(.5f);
+
+
+        for (int i = 0; i < 4; i++)
         {
-            bulletDelay = bulletDelay + 3;
-            Instantiate(enemyBullet2, transform.position, Quaternion.identity);
+             Instantiate(enemyBullet2, transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(1);
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D col)

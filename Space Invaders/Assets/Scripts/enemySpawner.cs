@@ -46,7 +46,7 @@ public class enemySpawner : MonoBehaviour
 
             if (patternNum == 1)
             {
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     Vector3 spawnPosition = new Vector3(0, 0, 0);
                     Quaternion spawnRotation = Quaternion.identity;
@@ -56,7 +56,7 @@ public class enemySpawner : MonoBehaviour
             }
             else if(patternNum == 2)
             {
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     Vector3 spawnPosition = new Vector3(0, 0, 0);
                     Quaternion spawnRotation = Quaternion.identity;
