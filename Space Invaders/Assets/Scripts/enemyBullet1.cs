@@ -37,7 +37,7 @@ public class enemyBullet1 : MonoBehaviour
             {
                 Spaceship.health -= 1;
 
-                StartCoroutine(Spaceship.blink());
+                
             }
             else
             {

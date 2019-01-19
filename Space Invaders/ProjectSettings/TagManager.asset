@@ -10,6 +10,7 @@ TagManager:
   - Shield
   - AlienBullet
   - despawner
+  - carrier
   layers:
   - Default
   - TransparentFX

@@ -38,7 +38,7 @@ public class Shield : MonoBehaviour
 
         if (Input.GetButtonUp("Fire3"))
         {
-            Spaceship.isButtonPressed = false;
+            //Spaceship.isButtonPressed = false;
             Destroy(gameObject);
         }
     }
