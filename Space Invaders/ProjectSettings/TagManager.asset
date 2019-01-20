@@ -11,6 +11,7 @@ TagManager:
   - AlienBullet
   - despawner
   - carrier
+  - hacker
   layers:
   - Default
   - TransparentFX

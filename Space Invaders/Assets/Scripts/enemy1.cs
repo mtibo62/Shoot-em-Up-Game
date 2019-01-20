@@ -12,6 +12,8 @@ public class enemy1 : MonoBehaviour
 
     public int bulletDelay;
 
+    private bool isHacked = false;
+
 
 
     // Start is called before the first frame update
@@ -27,10 +29,17 @@ public class enemy1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > bulletDelay)
+        if (isHacked != true)
         {
-            bulletDelay = bulletDelay + 3;
-            Instantiate(enemyBullet1, transform.position, Quaternion.identity);
+            if (Time.time > bulletDelay)
+            {
+                bulletDelay = bulletDelay + 3;
+                Instantiate(enemyBullet1, transform.position, Quaternion.identity);
+            }
+        }
+        else
+        {
+
         }
     }
 

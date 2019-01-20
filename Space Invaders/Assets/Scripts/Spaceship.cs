@@ -30,6 +30,8 @@ public class Spaceship : MonoBehaviour
     //assigns bullet sprite that spaceship will shoot when holding down space bar/ctrl
     public GameObject theBullet;
 
+    public GameObject hackBullet;
+
     //assigns fireburst sprite that the spaceship will create when moving forward
     public GameObject fireBurst;
 
@@ -139,6 +141,11 @@ public class Spaceship : MonoBehaviour
         //{
         //    isButtonPressed = false;
         //}
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Instantiate(hackBullet, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
+        }
     }
 
     //checks to see if there is enough ammo to shoot and will initialize either the bullets or the noAmmo sprites accordingly

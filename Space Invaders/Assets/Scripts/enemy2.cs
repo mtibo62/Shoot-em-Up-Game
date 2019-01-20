@@ -50,5 +50,15 @@ public class enemy2 : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(col.tag == "Player")
+        {
+            hackedReposition();
+        }
+    }
+
+    void hackedReposition()
+    {
+
     }
 }
