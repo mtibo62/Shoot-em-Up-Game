@@ -4808,7 +4808,7 @@ Transform:
   m_LocalScale: {x: 6.1773105, y: 11.637707, z: 4.198707}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 88.51}
 --- !u!1 &269560416
 GameObject:
@@ -4840,7 +4840,7 @@ Transform:
   - {fileID: 1832356859}
   - {fileID: 1779088488}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &271210554
 GameObject:
@@ -4878,11 +4878,18 @@ MonoBehaviour:
   speed: 100
   theBullet: {fileID: 6886062518200987131, guid: f878b9f38a110da4d9cb70b6cfe26d74,
     type: 3}
-  hackBullet: {fileID: 0}
+  hackBullet: {fileID: 1925632910400070, guid: ba584e8cca3830d4684e5887baf39ddd, type: 3}
   fireBurst: {fileID: 6837374936714064166, guid: 40d076097860bc749a3c33d32fdf21fa,
     type: 3}
   shield: {fileID: 5765920182896623024, guid: 316ca1f167be0d149b01a52d74e7cba2, type: 3}
   noAmmo: {fileID: 1670030446304413754, guid: 3882a87f5a88b664b953fc5b187f704c, type: 3}
+  hackedSpots:
+  - {fileID: 544817182}
+  - {fileID: 1881815846}
+  - {fileID: 1058084519}
+  - {fileID: 2104928494}
+  - {fileID: 628647709}
+  - {fileID: 1460328023}
 --- !u!50 &271210556
 Rigidbody2D:
   serializedVersion: 4
@@ -5107,7 +5114,7 @@ GameObject:
   m_Layer: 0
   m_Name: helperSpot
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5178,7 +5185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &628647709
 GameObject:
@@ -5192,7 +5199,7 @@ GameObject:
   m_Layer: 0
   m_Name: helperSpot (4)
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5240,7 +5247,7 @@ Transform:
   - {fileID: 1286498849}
   - {fileID: 1522930116}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &774078107
 GameObject:
@@ -5397,7 +5404,7 @@ Transform:
   m_Children:
   - {fileID: 1981629019}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &959623554
 GameObject:
@@ -5537,7 +5544,7 @@ GameObject:
   m_Layer: 0
   m_Name: helperSpot (2)
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5693,7 +5700,7 @@ GameObject:
   m_Layer: 0
   m_Name: helperSpot (5)
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6371,7 +6378,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1779088486
 GameObject:
@@ -11176,7 +11183,7 @@ GameObject:
   m_Layer: 0
   m_Name: helperSpot (1)
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -11522,7 +11529,7 @@ GameObject:
   m_Layer: 0
   m_Name: helperSpot (3)
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -11590,7 +11597,7 @@ PrefabInstance:
     - target: {fileID: 4183531105350489533, guid: e276ae257ea75a74cb792e3618f518d2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4183531105350489533, guid: e276ae257ea75a74cb792e3618f518d2,
         type: 3}

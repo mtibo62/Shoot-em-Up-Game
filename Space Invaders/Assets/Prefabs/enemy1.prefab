@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c75a25cbf4e7a44d8352a78afa3d89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 30
   enemyBullet1: {fileID: 7096676041079867593, guid: 29b20010565e9a44ab65a47f5d42c468,
     type: 3}
   bulletDelay: 0

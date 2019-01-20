@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Spaceship : MonoBehaviour
 {
+
+    public static Spaceship Instance = null;
+
+
     //adds slight delay between bullets when holding down space bar
     public int bulletDelay = 0;
 
@@ -51,6 +55,13 @@ public class Spaceship : MonoBehaviour
     //initalizes score variable that will increase whenever the player kills a alien
     public static int score;
 
+    /**
+    public  GameObject[] hackedSpots;
+
+    public static GameObject nextOpenSpot;
+    public static int currentSpot = 0;
+    **/
+    public static int amountHacked = 0;
 
     void Awake()
     {
@@ -61,6 +72,8 @@ public class Spaceship : MonoBehaviour
         //sets the UI tesxt to the amount of bullets the player starts with
         var textUIComp = GameObject.Find("bulletAmount").GetComponent<Text>();
         textUIComp.text = numBullets.ToString();
+
+        //nextOpenSpot = hackedSpots[0];
     }
 
     void FixedUpdate()
@@ -144,7 +157,8 @@ public class Spaceship : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Instantiate(hackBullet, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
+            //Instantiate(hackBullet, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
+
         }
     }
 
@@ -248,4 +262,14 @@ public class Spaceship : MonoBehaviour
         //when this is true it will cause spaceship to move slower and become invaulnerable for a short epriod of time
         isHit = false;
     }
+
+    //static public void incrementOpenSpot()
+    //{
+    //    currentSpot++;
+
+    //    nextOpenSpot = Spaceship.Instance.hackedSpots[currentSpot];
+
+    //}
+
+    
 }
