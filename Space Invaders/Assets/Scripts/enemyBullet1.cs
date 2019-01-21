@@ -14,7 +14,7 @@ public class enemyBullet1 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        rb.velocity = Vector2.down * speed;
+        rb.velocity = Vector2.left * speed;
     }
 
     // Update is called once per frame

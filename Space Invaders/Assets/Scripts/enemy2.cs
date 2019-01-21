@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class enemy2 : MonoBehaviour
 {
+    public static enemy2 Instance; 
+
     public int speed;
 
     private Rigidbody2D rb;
@@ -15,19 +17,23 @@ public class enemy2 : MonoBehaviour
     public GameObject hackedEnemy;
 
 
-    //private static Transform openSpot;
+    private Transform openSpot;
 
 
     // Movement speed in units/sec.
-    //public float moveSpeed = 50;
+     public float moveSpeed = 50;
 
     // Time when the movement started.
-    //private float startTime;
+     private float startTime;
 
     // Total distance between the markers.
-    //private float journeyLength;
+     private float journeyLength;
 
-    //private static bool beginMove = false;
+    private  bool beginMove = false;
+
+    private bool spotReached = false;
+
+    private bool isHacked = false;
 
   
 
@@ -35,6 +41,7 @@ public class enemy2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         
         rb = GetComponent<Rigidbody2D>();
 
@@ -63,37 +70,44 @@ public class enemy2 : MonoBehaviour
     }
     private void Update()
     {
-        //if (beginMove == true)
-        //{
-        //    //journeyLength = Vector3.Distance(transform.position, openSpot.transform.position);
+        if (beginMove == true)
+        {
+            //    //journeyLength = Vector3.Distance(transform.position, openSpot.transform.position);
 
-        //    //// Distance moved = time * speed.
-        //    //float distCovered = (Time.time - startTime) * speed;
+            //    //// Distance moved = time * speed.
+            //    //float distCovered = (Time.time - startTime) * speed;
 
-        //    //// Fraction of journey completed = current distance divided by total distance.
-        //    //float fracJourney = distCovered / journeyLength;
+            //    //// Fraction of journey completed = current distance divided by total distance.
+            //    //float fracJourney = distCovered / journeyLength;
 
-        //    //// Set our position as a fraction of the distance between the markers.
-        //    //transform.position = Vector3.Lerp(transform.position, openSpot.transform.position, fracJourney);
+            //    //// Set our position as a fraction of the distance between the markers.
+            //    //transform.position = Vector3.Lerp(transform.position, openSpot.transform.position, fracJourney);
 
-        //    //if(transform.position == openSpot.transform.position)
-        //    //{
-        //    //    beginLerping = false;
-        //    //}
+            //    //if(transform.position == openSpot.transform.position)
+            //    //{
+            //    //    beginLerping = false;
+            //    //}
 
-        //    // The step size is equal to speed times frame time.
-        //    float step = moveSpeed * Time.deltaTime;
+            // the step size is equal to speed times frame time.
+            float step = moveSpeed * Time.deltaTime;
 
-        //    rb.velocity = Vector2.left * 0;
-        //    // Move our position a step closer to the target.
-        //    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, openSpot.position, 1);
+            //rb.velocity = Vector2.left * 0;
+            // move our position a step closer to the target.
+            this.transform.position = Vector3.MoveTowards(this.transform.position, openSpot.position, 1);
 
-        //    if (gameObject.transform.position == openSpot.position)
-        //    {
-        //        beginMove = false;
-        //    }
-        //}
-    }
+            if (this.transform.position == openSpot.position)
+            {
+                beginMove = false;
+                spotReached = true;
+            }
+        }
+
+        if(spotReached == true)
+            {
+                this.transform.position = openSpot.position;
+            }
+    
+}
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -102,26 +116,28 @@ public class enemy2 : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if(col.tag == "Player")
+        if(col.tag == "Player" && isHacked == true)
         {
             Destroy(gameObject);
         }
 
         if (col.tag == "hacker")
         {
-            //if (Spaceship.currentspot < 6)
-            //{
-            //hackedreposition();
-            //beginmove = true;
-            //openspot = spaceship.nextopenspot.transform;
+            Debug.Log("isHit");
+            if (Spaceship.currentSpot < 6)
+            {
+                //hackedreposition();
+                beginMove = true;
+                openSpot = Spaceship.nextOpenSpot.transform;
 
-            //this.getComponent<isHacked>().enabled = true;
-            //this.getcomponent<enemy2>().enabled = false;
-            Spaceship.amountHacked++;
-            GameObject go = Instantiate(hackedEnemy, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
-                
+                //this.getComponent<isHacked>().enabled = true;
+                //this.getcomponent<enemy2>().enabled = false;
+                Spaceship.amountHacked++;
+                Spaceship.incrementOpenSpot();
+                //GameObject go = Instantiate(hackedEnemy, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
+
                 //hackedenemy.transform.parent = spaceship.instance.hackedspots[0];
-            //}
+            }
         }
     }
 

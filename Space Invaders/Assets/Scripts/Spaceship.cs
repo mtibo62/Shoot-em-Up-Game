@@ -55,13 +55,16 @@ public class Spaceship : MonoBehaviour
     //initalizes score variable that will increase whenever the player kills a alien
     public static int score;
 
-    /**
+    
     public  GameObject[] hackedSpots;
 
     public static GameObject nextOpenSpot;
     public static int currentSpot = 0;
-    **/
+    
     public static int amountHacked = 0;
+
+
+    //////////////////////////////////////////////////////
 
     void Awake()
     {
@@ -73,8 +76,10 @@ public class Spaceship : MonoBehaviour
         var textUIComp = GameObject.Find("bulletAmount").GetComponent<Text>();
         textUIComp.text = numBullets.ToString();
 
-        //nextOpenSpot = hackedSpots[0];
+        nextOpenSpot = hackedSpots[0];
     }
+
+
 
     void FixedUpdate()
     {
@@ -102,6 +107,9 @@ public class Spaceship : MonoBehaviour
     //}
 
 
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -116,6 +124,10 @@ public class Spaceship : MonoBehaviour
         {
             canShoot = true;
         }
+
+        
+         ///////////////SHOOTING/////////////////
+       
 
         //this if statement is checking to see if the player is able to shoot
         if (canShoot)
@@ -141,6 +153,8 @@ public class Spaceship : MonoBehaviour
             bulletDelay++;
         }
 
+        //////////CREATE SHIELD ////////////////
+
         //chekcs to see if player is pressing Fire3 (shift) which will cause the shield to appear
         //also makes sure the other action buttons(space / shift) are not also pressed
         if (Input.GetButtonDown("Fire3") && !Input.GetButton("Jump"))
@@ -155,13 +169,16 @@ public class Spaceship : MonoBehaviour
         //    isButtonPressed = false;
         //}
 
+        //////////HACKED BULLETS///////////////
+
         if (Input.GetKeyDown(KeyCode.E))
         {
-            //Instantiate(hackBullet, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
+            Instantiate(hackBullet, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
 
         }
     }
 
+    //////////CRESTING BULLETS/////////////////
     //checks to see if there is enough ammo to shoot and will initialize either the bullets or the noAmmo sprites accordingly
     void bulletShoot()
     {
@@ -184,6 +201,8 @@ public class Spaceship : MonoBehaviour
         }
     }
 
+
+    //////////CHANGING UI///////////////////
 
     //increases the bullets amount when enemy bullets collide witht he shield when engaged
     static public void IncreaseBulletAmountUI()
@@ -209,11 +228,6 @@ public class Spaceship : MonoBehaviour
         textUIComp.text = numBullets.ToString();
     }
 
-    //creates the fireboost sprite when the player presses rigth arrow/D
-    void fireBoost()
-    {
-        Instantiate(fireBurst, new Vector3(transform.position.x - 7,transform.position.y,0) , Quaternion.identity);
-    }
 
     //increases score amount by 10 whenever a alien is destroyed
     static public void IncreaseTestUIScore()
@@ -226,6 +240,17 @@ public class Spaceship : MonoBehaviour
 
         textUIComp.text = score.ToString();
     }
+
+    ///////////////CREATING FIRE BOOST///////////////////
+
+    //creates the fireboost sprite when the player presses rigth arrow/D
+    void fireBoost()
+    {
+        Instantiate(fireBurst, new Vector3(transform.position.x - 7,transform.position.y,0) , Quaternion.identity);
+    }
+
+
+    /////BLINKING ANIMATION /////////
 
     //spaceship collision with enemy that causes blinking to signifiy damage
     void OnTriggerEnter2D(Collider2D col)
@@ -263,13 +288,14 @@ public class Spaceship : MonoBehaviour
         isHit = false;
     }
 
-    //static public void incrementOpenSpot()
-    //{
-    //    currentSpot++;
+    static public void incrementOpenSpot()
+    {
+        Debug.Log("before: " + currentSpot);
+        currentSpot++;
+        Debug.Log("after: " + currentSpot);
+        nextOpenSpot = Spaceship.Instance.hackedSpots[currentSpot];
 
-    //    nextOpenSpot = Spaceship.Instance.hackedSpots[currentSpot];
+    }
 
-    //}
 
-    
 }

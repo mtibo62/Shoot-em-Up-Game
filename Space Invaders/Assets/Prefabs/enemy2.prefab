@@ -96,11 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f18929422de3349a229387ea7a2c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 10
   enemyBullet2: {fileID: 5324402262852503318, guid: 0b2b1bb99306af94f9a61f919a8bd1c3,
     type: 3}
   hackedEnemy: {fileID: 276438099970111925, guid: 6af065da5fa5ea34bb3a57744ca78a85,
     type: 3}
+  moveSpeed: 50
 --- !u!50 &8660208441035175962
 Rigidbody2D:
   serializedVersion: 4
