@@ -4,46 +4,55 @@ using UnityEngine;
 
 public class enemy2 : MonoBehaviour
 {
-    public static enemy2 Instance; 
+    public static enemy2 Instance;
 
+    //speed enemy will move at spawn
     public int speed;
 
     private Rigidbody2D rb;
 
+    //gets gameobject for the enemybullet
     public GameObject enemyBullet2;
 
+    
+    public GameObject theBullet;
+
+    //delay between each shot the enemy has
     private int bulletDelay = 6;
 
-    public GameObject hackedEnemy;
+    //controls the delay of the hacked ship
+    private int hackedBulletDelay = 0;
 
+    
+    private SpriteRenderer spriteRenderer;
 
     private Transform openSpot;
 
+    public Sprite startSprite;
+
+    public Sprite hackedSprite;
+
 
     // Movement speed in units/sec.
-     public float moveSpeed = 50;
+    public float moveSpeed = 50;
 
-    // Time when the movement started.
-     private float startTime;
-
-    // Total distance between the markers.
-     private float journeyLength;
-
-    private  bool beginMove = false;
+    private bool beginMove = false;
 
     private bool spotReached = false;
 
     private bool isHacked = false;
 
-  
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
-        
+
         rb = GetComponent<Rigidbody2D>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         rb.velocity = Vector2.left * speed;
 
@@ -51,42 +60,28 @@ public class enemy2 : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    //methods used to instantiate the enemybulley
     IEnumerator spawnBullet()
     {
+        yield return new WaitForSeconds(.5f);
 
-            yield return new WaitForSeconds(.5f);
-
-
-            for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
+        {
+            while (isHacked == false)
             {
-
-                //Instantiate(enemyBullet2, transform.position, Quaternion.identity);
+                Instantiate(enemyBullet2, transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(1);
-            
             }
-        
-
+        }
     }
+
+
     private void Update()
     {
+
+        //this will not happen until an unhacked enemy is hit with a hack shot
         if (beginMove == true)
         {
-            //    //journeyLength = Vector3.Distance(transform.position, openSpot.transform.position);
-
-            //    //// Distance moved = time * speed.
-            //    //float distCovered = (Time.time - startTime) * speed;
-
-            //    //// Fraction of journey completed = current distance divided by total distance.
-            //    //float fracJourney = distCovered / journeyLength;
-
-            //    //// Set our position as a fraction of the distance between the markers.
-            //    //transform.position = Vector3.Lerp(transform.position, openSpot.transform.position, fracJourney);
-
-            //    //if(transform.position == openSpot.transform.position)
-            //    //{
-            //    //    beginLerping = false;
-            //    //}
 
             // the step size is equal to speed times frame time.
             float step = moveSpeed * Time.deltaTime;
@@ -95,56 +90,101 @@ public class enemy2 : MonoBehaviour
             // move our position a step closer to the target.
             this.transform.position = Vector3.MoveTowards(this.transform.position, openSpot.position, 1);
 
+
+            //when hackedenemy reaches destination
             if (this.transform.position == openSpot.position)
             {
                 beginMove = false;
                 spotReached = true;
+
             }
         }
 
-        if(spotReached == true)
-            {
-                this.transform.position = openSpot.position;
-            }
-    
-}
+        //once the hacked enemy reaches its designated spot this will allow them to follow the player
+        if (spotReached == true && Spaceship.health != 0)
+        {
+            this.transform.position = openSpot.position;
+        }
 
+        //determines if the enemy is hacked and will allow player control of shooting 
+        if (isHacked == true)
+        {
+            if (Input.GetButton("Jump") && hackedBulletDelay > 10 && !Input.GetButton("Fire3"))
+            {
+                spawnShot();
+            }
+            hackedBulletDelay++;
+        }
+            
+        
+        //turn ship back to normal upon death
+        if(Spaceship.health == 0)
+            {
+                transform.Rotate(0, 0, 180);
+                transform.gameObject.tag = "hacked";
+            }
+    }
+
+    
     void OnTriggerEnter2D(Collider2D col)
     {
+        //enemy has hit despawner on left of game screen
         if (col.tag == "despawner")
         {
             Destroy(gameObject);
         }
 
-        if(col.tag == "Player" && isHacked == true)
+        //enemy has hit the player, but this will only happen when the enemy is not hacked
+        ///causes player to blink and enemy gets destroyed
+        if (col.tag == "Player" && isHacked != true)
         {
+            StartCoroutine(Spaceship.blink());
             Destroy(gameObject);
         }
-
-        if (col.tag == "hacker")
+        
+        //if enemy is hit with hacker shot they will be hacked and controled by player
+        if (col.tag == "hacker" && isHacked != true)
         {
             Debug.Log("isHit");
-            if (Spaceship.currentSpot < 6)
+            if (Spaceship.currentSpot <= 5)
             {
-                //hackedreposition();
+
+                isHacked = true;
                 beginMove = true;
                 openSpot = Spaceship.nextOpenSpot.transform;
+                transform.Rotate(0, 0, 180);
+                transform.gameObject.tag = "hacked";
+                StartCoroutine(ChangeAlienSprite());
 
-                //this.getComponent<isHacked>().enabled = true;
-                //this.getcomponent<enemy2>().enabled = false;
-                Spaceship.amountHacked++;
-                Spaceship.incrementOpenSpot();
-                //GameObject go = Instantiate(hackedEnemy, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
-
-                //hackedenemy.transform.parent = spaceship.instance.hackedspots[0];
+                if (Spaceship.currentSpot < 5)
+                {
+                    Spaceship.currentSpot++;
+                }
             }
         }
     }
 
-    //void hackedReposition()
-    //{
-    //    enemyLerp.moveAlien(Spaceship.nextOpenSpot, this.gameObject);
-    //    Spaceship.incrementOpenSpot();
-    //}
+    //initializes the bullet when enemy is hacked
+    void spawnShot()
+    {
+        if (Spaceship.numBullets > 0)
+        {
+            Instantiate(theBullet, this.transform.position, Quaternion.identity);
+            hackedBulletDelay = 0;
+        }
+    }
 
+    //changes sprite of enemy when hacked
+    public IEnumerator ChangeAlienSprite()
+    {
+        if (spriteRenderer.sprite == startSprite)
+        {
+            spriteRenderer.sprite = hackedSprite;
+        }
+        else
+        {
+            spriteRenderer.sprite = startSprite;
+        }
+        yield return null;
+    }
 }

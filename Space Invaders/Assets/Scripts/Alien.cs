@@ -103,6 +103,7 @@ public class Alien : MonoBehaviour
         }
     }
 
+
     void FixedUpdate()
     {
         if(Time.time > baseFireWaitTime)

@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 3374451144671425278}
   - component: {fileID: 8660208441035175962}
   - component: {fileID: 9206692625427597253}
-  - component: {fileID: 2284241165013635557}
-  - component: {fileID: 8945538515785091121}
   m_Layer: 0
   m_Name: enemy2
   m_TagString: Alien
@@ -96,11 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f18929422de3349a229387ea7a2c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 25
   enemyBullet2: {fileID: 5324402262852503318, guid: 0b2b1bb99306af94f9a61f919a8bd1c3,
     type: 3}
-  hackedEnemy: {fileID: 276438099970111925, guid: 6af065da5fa5ea34bb3a57744ca78a85,
+  theBullet: {fileID: 6886062518200987131, guid: f878b9f38a110da4d9cb70b6cfe26d74,
     type: 3}
+  startSprite: {fileID: 21300000, guid: 4cf8e74ffb267104c917b5fec4cbcbf9, type: 3}
+  hackedSprite: {fileID: 21300000, guid: 6110ecdd48b5b774db5fa2fded2d8c59, type: 3}
   moveSpeed: 50
 --- !u!50 &8660208441035175962
 Rigidbody2D:
@@ -149,29 +149,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 64}
   m_EdgeRadius: 0
---- !u!114 &2284241165013635557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2284157632990661945}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f490ccc18788a4fb9004a4860433d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ship: {fileID: 0}
---- !u!114 &8945538515785091121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2284157632990661945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c88618f2490cd543b3f3cba29502bbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lerpSpeed: 1

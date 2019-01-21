@@ -55,8 +55,9 @@ public class Spaceship : MonoBehaviour
     //initalizes score variable that will increase whenever the player kills a alien
     public static int score;
 
-    
-    public  GameObject[] hackedSpots;
+    //public GameObject helperSpots;
+
+    public GameObject[] hackedSpots;
 
     public static GameObject nextOpenSpot;
     public static int currentSpot = 0;
@@ -76,8 +77,20 @@ public class Spaceship : MonoBehaviour
         var textUIComp = GameObject.Find("bulletAmount").GetComponent<Text>();
         textUIComp.text = numBullets.ToString();
 
+        
+
+        //for(int i = 0; i < 6; i++)
+        //{
+        //    for(int j = 0; j < 6; i++)
+        //    {
+        //        hackedSpots[i] = Instantiate(helperSpots, new Vector3(transform.position.x + (i*24), transform.position.y+(j*24), 0), Quaternion.identity);
+        //    }
+        //}
+
         nextOpenSpot = hackedSpots[0];
+
     }
+
 
 
 
@@ -95,6 +108,8 @@ public class Spaceship : MonoBehaviour
         else{
             rb.velocity = new Vector2(horzMove * (speed/2), vertMove * (speed/2));
         }
+
+        nextOpenSpot = hackedSpots[currentSpot];
     }
 
     //void OnCollisionEnter(Collision collision)
@@ -255,7 +270,7 @@ public class Spaceship : MonoBehaviour
     //spaceship collision with enemy that causes blinking to signifiy damage
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "carrier" || col.gameObject.tag == "Alien" || col.gameObject.tag == "AlienBullet")
+        if (col.tag == "carrier" || col.gameObject.tag == "AlienBullet")
         {
             StartCoroutine(blink());
             health--;
@@ -293,7 +308,7 @@ public class Spaceship : MonoBehaviour
         Debug.Log("before: " + currentSpot);
         currentSpot++;
         Debug.Log("after: " + currentSpot);
-        nextOpenSpot = Spaceship.Instance.hackedSpots[currentSpot];
+        //nextOpenSpot = hackedSpots[currentSpot];
 
     }
 
