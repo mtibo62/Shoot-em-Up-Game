@@ -13,17 +13,17 @@ public class Spaceship : MonoBehaviour
     public int bulletDelay = 0;
 
     //start game off with 100 bullets for player to use 
-    public static int numBullets = 100;
+    public static int numBullets;
 
    //determins if player is out of ammo and can shoot or not
    static private bool canShoot = true;
     
     //determines if player has been hit by enemy
     //will make player slower and invulnerable for a short time
-    static private bool isHit = false;
+    static private bool isHit;
 
     //movement speed of ship
-    public float speed = 30;
+    public float speed;
 
     //initializes Rigidbody
     private Rigidbody2D rb;
@@ -45,12 +45,15 @@ public class Spaceship : MonoBehaviour
     //assigns UI sprite that will display when player is out of ammo
     public GameObject noAmmo;
 
+    //assigns UI sprite that will display when player has hack ready
+    public GameObject hackReadyDisplay;
+
     //determines if player is already holding down shoot button so they annot also hold down 
     //sheld button and vice versa
-    public static bool isButtonPressed = false;
+    public static bool isButtonPressed;
 
     //starts player out with 3 points of health
-    public static int health = 3;
+    public static int health;
 
     //initalizes score variable that will increase whenever the player kills a alien
     public static int score;
@@ -60,15 +63,46 @@ public class Spaceship : MonoBehaviour
     public GameObject[] hackedSpots;
 
     public static GameObject nextOpenSpot;
-    public static int currentSpot = 0;
+    public static int currentSpot;
     
-    public static int amountHacked = 0;
+    public static int amountHacked;
+
+    public deathScreen deathScreen;
+
+    public bool hackReady = false;
+
+    public static int killStreak;
+
+    public GameObject[] healthObject;
+
+    static int currentHealthSpot;
+
+    static private bool canRemoveHealth;
+
+
+
 
 
     //////////////////////////////////////////////////////
 
     void Awake()
     {
+        //initializing values of all static vars so when game is restarted everything will work correctly
+        canShoot = true;
+        isButtonPressed = false;
+        health = 3;
+        score = 0;
+        currentSpot = 0;
+        amountHacked = 0;
+        isHit = false;
+        numBullets = 100;
+        killStreak = 0;
+        currentHealthSpot = 0;
+        canRemoveHealth = false;
+    
+
+   
+
         rb = GetComponent<Rigidbody2D>();
 
         renderer = GetComponent<SpriteRenderer>();
@@ -79,16 +113,8 @@ public class Spaceship : MonoBehaviour
 
         
 
-        //for(int i = 0; i < 6; i++)
-        //{
-        //    for(int j = 0; j < 6; i++)
-        //    {
-        //        hackedSpots[i] = Instantiate(helperSpots, new Vector3(transform.position.x + (i*24), transform.position.y+(j*24), 0), Quaternion.identity);
-        //    }
-        //}
-
         nextOpenSpot = hackedSpots[0];
-
+        
     }
 
 
@@ -106,28 +132,24 @@ public class Spaceship : MonoBehaviour
             rb.velocity = new Vector2(horzMove * speed, vertMove * speed);
         }
         else{
-            rb.velocity = new Vector2(horzMove * (speed/2), vertMove * (speed/2));
+            
+            rb.velocity = new Vector2(horzMove * (speed/1.5f), vertMove * (speed/1.5f));
         }
 
         nextOpenSpot = hackedSpots[currentSpot];
+
+        
+        
     }
-
-    //void OnCollisionEnter(Collision collision)
-    //{
-    //    //prevents
-    //    if (collision.gameObject.CompareTag("topUI"))  // or if(gameObject.CompareTag("YourWallTag"))
-    //    {
-    //        rb.velocity = Vector3.zero;
-    //    }
-    //}
-
-
 
 
 
     // Update is called once per frame
     void Update()
     {
+
+
+
         //determines if player is pressing D or right arrow to create the fire burst behind spaceship
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
@@ -140,9 +162,9 @@ public class Spaceship : MonoBehaviour
             canShoot = true;
         }
 
-        
-         ///////////////SHOOTING/////////////////
-       
+
+        ///////////////SHOOTING/////////////////
+
 
         //this if statement is checking to see if the player is able to shoot
         if (canShoot)
@@ -153,7 +175,7 @@ public class Spaceship : MonoBehaviour
             {
                 isButtonPressed = true;
 
-                bulletShoot(); 
+                bulletShoot();
             }
 
             //checks to see if player is pressing Jump(Space bar) to create a rapid fire of bullets 
@@ -161,7 +183,7 @@ public class Spaceship : MonoBehaviour
             //also makes sure  the other action buttons (space/shift) are not also pressed
             if (Input.GetButton("Jump") && bulletDelay > 5 && !Input.GetButton("Fire3"))
             {
-                
+
 
                 bulletShoot();
             }
@@ -176,7 +198,7 @@ public class Spaceship : MonoBehaviour
         {
             isButtonPressed = true;
 
-            Instantiate(shield, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);  
+            Instantiate(shield, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
         }
 
         //if(Input.GetButtonUp("Fire3") && Input.GetButtonUp("Fire1") && Input.GetButtonUp("Jump"))
@@ -184,11 +206,43 @@ public class Spaceship : MonoBehaviour
         //    isButtonPressed = false;
         //}
 
-        //////////HACKED BULLETS///////////////
-
-        if (Input.GetKeyDown(KeyCode.E))
+        ////////HACKED BULLETS///////////////
+        if (hackReady == true)
         {
-            Instantiate(hackBullet, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Instantiate(hackBullet, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
+                hackReady = false;
+                 GameObject.Find("hackReadyText").GetComponent<Text>().text = "";
+                
+            }
+        }
+
+
+        ////DEATH SCREEN////
+        if(health <= 0) { 
+
+            //Destroy(gameObject);
+        StartCoroutine(deathScreenActivate());
+            
+        }
+
+        /////CHERCK IF SCORE IS CORRECT FOR HACK ABILITY////////
+        if (killStreak >= 10)
+        {
+            killStreak = 0;
+            hackReady = true;
+            GameObject.Find("hackReadyText").GetComponent<Text>().text = "Hack Ready";
+            Instantiate(hackReadyDisplay, new Vector3(0, -4, -1), Quaternion.identity);
+        }
+
+
+        /////DESTROYS HEALTH ONJECT WHEN HIT/////
+        if (canRemoveHealth && currentHealthSpot <= 2)
+        {
+            canRemoveHealth = false;
+            Destroy(healthObject[currentHealthSpot]);
+            currentHealthSpot++;
 
         }
     }
@@ -211,7 +265,7 @@ public class Spaceship : MonoBehaviour
         }
         else
         {
-            Instantiate(noAmmo, new Vector3(0, 0, -1), Quaternion.identity);
+            Instantiate(noAmmo, new Vector3(0, -4, -1), Quaternion.identity);
             canShoot = false;
         }
     }
@@ -245,7 +299,7 @@ public class Spaceship : MonoBehaviour
 
 
     //increases score amount by 10 whenever a alien is destroyed
-    static public void IncreaseTestUIScore()
+     static public void IncreaseTestUIScore()
     {
         var textUIComp = GameObject.Find("Score").GetComponent<Text>();
 
@@ -254,6 +308,8 @@ public class Spaceship : MonoBehaviour
         score += 10;
 
         textUIComp.text = score.ToString();
+
+        killStreak++;
     }
 
     ///////////////CREATING FIRE BOOST///////////////////
@@ -270,10 +326,10 @@ public class Spaceship : MonoBehaviour
     //spaceship collision with enemy that causes blinking to signifiy damage
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "carrier" || col.gameObject.tag == "AlienBullet")
+        if ((col.tag == "carrier" || col.gameObject.tag == "AlienBullet" || col.gameObject.tag == "Alien"))
         {
             StartCoroutine(blink());
-            health--;
+
         }
 
 
@@ -285,32 +341,42 @@ public class Spaceship : MonoBehaviour
         //when this is true it will cause spaceship to move slower and become invaulnerable for a short epriod of time
         isHit = true;
 
+        canRemoveHealth = true;
+
+        
+
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0f);
+        Debug.Log("blink");
 
         yield return new WaitForSeconds(.05f);
 
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1f);
+        Debug.Log("blink");
         yield return new WaitForSeconds(.05f);
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0f);
+        Debug.Log("blink");
 
         yield return new WaitForSeconds(.05f);
 
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1f);
+        Debug.Log("blink");
 
         yield return new WaitForSeconds(.5f);
 
         //when this is true it will cause spaceship to move slower and become invaulnerable for a short epriod of time
         isHit = false;
+        
+
+
     }
 
-    static public void incrementOpenSpot()
+
+    public IEnumerator deathScreenActivate()
     {
-        Debug.Log("before: " + currentSpot);
-        currentSpot++;
-        Debug.Log("after: " + currentSpot);
-        //nextOpenSpot = hackedSpots[currentSpot];
-
+        
+        yield return new WaitForSeconds(0);
+        deathScreen.setActive();
+        Destroy(gameObject);
     }
-
 
 }

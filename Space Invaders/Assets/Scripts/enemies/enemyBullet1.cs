@@ -9,6 +9,8 @@ public class enemyBullet1 : MonoBehaviour
 
     public int speed = 30;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,19 +35,15 @@ public class enemyBullet1 : MonoBehaviour
 
         if (col.gameObject.tag == "Player")
         {
-            if(Spaceship.health > 0)
-            {
-                Spaceship.health -= 1;
-
-                
-            }
-            else
-            {
-                DestroyObject(col.gameObject, 0.5f);
-            }
             Destroy(gameObject);
+            if (Spaceship.health > 0)
+            {
 
-            
+                Spaceship.health--;
+                Debug.Log(Spaceship.health);
+
+            }
         }
     }
-  }
+
+}

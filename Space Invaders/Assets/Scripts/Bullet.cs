@@ -41,6 +41,8 @@ public class Bullet : MonoBehaviour {
 
             DestroyObject(col.gameObject);
 
+        
+
 
         }
 

@@ -2,24 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy1 : MonoBehaviour
+public class enemy2 : MonoBehaviour
 {
-    public static enemy1 Instance;
+    public static enemy2 Instance;
 
+    //speed enemy will move at spawn
     public int speed;
 
     private Rigidbody2D rb;
 
-    public GameObject enemyBullet1;
+    //gets gameobject for the enemybullet
+    public GameObject enemyBullet2;
 
+    
     public GameObject theBullet;
 
-    public int bulletDelay = 6;
+    //delay between each shot the enemy has
+    private int bulletDelay = 6;
 
     //controls the delay of the hacked ship
     private int hackedBulletDelay = 0;
 
-
+    
     private SpriteRenderer spriteRenderer;
 
     private Transform openSpot;
@@ -38,6 +42,9 @@ public class enemy1 : MonoBehaviour
 
     private bool isHacked = false;
 
+    private int rotated = 1;
+
+
 
 
     // Start is called before the first frame update
@@ -52,27 +59,24 @@ public class enemy1 : MonoBehaviour
         rb.velocity = Vector2.left * speed;
 
         StartCoroutine(spawnBullet());
+
     }
 
     //methods used to instantiate the enemybulley
     IEnumerator spawnBullet()
     {
-
         yield return new WaitForSeconds(.5f);
 
-
-            for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
+        {
+            while (isHacked == false)
             {
-                while (isHacked == false)
-                    {
-                        Instantiate(enemyBullet1, transform.position, Quaternion.identity);
-                        yield return new WaitForSeconds(1);
-                 }
+                Instantiate(enemyBullet2, transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(1);
             }
-        
+        }
     }
 
-    
 
     private void Update()
     {
@@ -99,7 +103,7 @@ public class enemy1 : MonoBehaviour
         }
 
         //once the hacked enemy reaches its designated spot this will allow them to follow the player
-        if (spotReached == true && Spaceship.health != 0)
+        if (spotReached == true && GameObject.Find("Spaceship") != null)
         {
             this.transform.position = openSpot.position;
         }
@@ -113,15 +117,22 @@ public class enemy1 : MonoBehaviour
             }
             hackedBulletDelay++;
         }
-
+            
+        
         //turn ship back to normal upon death
-        if (Spaceship.health == 0)
-        {
-            transform.Rotate(0, 0, 180);
-            transform.gameObject.tag = "hacked";
-        }
+        if(GameObject.Find("Spaceship") == null)
+            {
+            if (rotated == 1 && isHacked)
+            {
+                transform.Rotate(0, 0, 180);
+                
+                StartCoroutine(ChangeAlienSprite());
+                rotated++;
+            }
+            }
     }
 
+    
     void OnTriggerEnter2D(Collider2D col)
     {
         //enemy has hit despawner on left of game screen
@@ -134,10 +145,11 @@ public class enemy1 : MonoBehaviour
         ///causes player to blink and enemy gets destroyed
         if (col.tag == "Player" && isHacked != true)
         {
-            StartCoroutine(Spaceship.blink());
+            
             Destroy(gameObject);
+            Spaceship.health--;
         }
-
+        
         //if enemy is hit with hacker shot they will be hacked and controled by player
         if (col.tag == "hacker" && isHacked != true)
         {
@@ -183,5 +195,4 @@ public class enemy1 : MonoBehaviour
         }
         yield return null;
     }
-
 }

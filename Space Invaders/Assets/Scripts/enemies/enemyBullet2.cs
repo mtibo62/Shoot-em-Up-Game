@@ -32,18 +32,13 @@ public class enemyBullet2 : MonoBehaviour
 
         if (col.gameObject.tag == "Player")
         {
+            Destroy(gameObject);
             if (Spaceship.health > 0)
             {
-                Spaceship.health -= 1;
 
-
-            }
-
-            Destroy(gameObject);
-
-            if (Spaceship.health <= 0)
-            {
-                DestroyObject(col.gameObject, 0.5f);
+                Spaceship.health--;
+                Debug.Log(Spaceship.health);
+                
             }
         }
 
@@ -59,6 +54,7 @@ public class enemyBullet2 : MonoBehaviour
 
 
     }
+
 
     
 }

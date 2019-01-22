@@ -20,6 +20,8 @@ public class enemySpawner : MonoBehaviour
     public GameObject enemyPattern5;
     public GameObject enemyPattern6;
 
+    public GameObject bossAlien;
+
 
 
 
@@ -38,29 +40,32 @@ public class enemySpawner : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
-        yield return new WaitForSeconds(delay);
-
-        //first wave of carriers (player should run out of bullets to learn that theier is a limited number of bullets)
-        GameObject.Instantiate(carrierPattern1, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(3);
-        GameObject.Instantiate(carrierPattern2, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(10);
-        GameObject.Instantiate(carrierPattern3, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(10);
-        GameObject.Instantiate(carrierPattern4, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(5);
-        GameObject.Instantiate(carrierPattern5, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(7);
 
 
 
-        while (Spaceship.score < 300 )
+        ////first wave of carriers (player should run out of bullets to learn that theier is a limited number of bullets)
+        //GameObject.Instantiate(carrierPattern1, transform.position, Quaternion.identity);
+        //yield return new WaitForSeconds(3);
+        //GameObject.Instantiate(carrierPattern2, transform.position, Quaternion.identity);
+        //yield return new WaitForSeconds(6);
+        //GameObject.Instantiate(carrierPattern3, transform.position, Quaternion.identity);
+        //yield return new WaitForSeconds(6);
+        //GameObject.Instantiate(carrierPattern4, transform.position, Quaternion.identity);
+        //yield return new WaitForSeconds(5);
+        //GameObject.Instantiate(carrierPattern5, transform.position, Quaternion.identity);
+        //yield return new WaitForSeconds(7);
+
+
+
+        while (Spaceship.score < 600 )
         {
-            int patternNum = Random.Range(1, 4);
+            int patternNum = Random.Range(1,4);
+
+            Debug.Log(patternNum);
 
             if (patternNum == 1)
             {
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     Vector3 spawnPosition = new Vector3(0, 0, 0);
                     Quaternion spawnRotation = Quaternion.identity;
@@ -68,7 +73,7 @@ public class enemySpawner : MonoBehaviour
                     //yield return new WaitForSeconds(4f);
                 }
             }
-            else if(patternNum == 2)
+           if(patternNum == 2)
             {
                 for (int i = 0; i < 1; i++)
                 {
@@ -78,7 +83,7 @@ public class enemySpawner : MonoBehaviour
                     //yield return new WaitForSeconds(4f);
                 }
             }
-            else if (patternNum == 3)
+            if (patternNum == 3)
             {
                 for (int i = 0; i < 1; i++)
                 {
@@ -90,6 +95,10 @@ public class enemySpawner : MonoBehaviour
             }
             yield return new WaitForSeconds(8);
         }
+
+        GameObject.Instantiate(bossAlien, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(delay);
+
     }
 
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class noAmmoBehavior : MonoBehaviour
+public class notificationBehavior : MonoBehaviour
 {
 
     public SpriteRenderer renderer;

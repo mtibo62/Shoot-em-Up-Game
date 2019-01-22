@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 15535758669160164, guid: a5e3ae6e25174cc4a9c092f4d3333b21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15535758669160164, guid: a5e3ae6e25174cc4a9c092f4d3333b21,
         type: 3}
@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 15535758669160164, guid: a5e3ae6e25174cc4a9c092f4d3333b21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15535758669160164, guid: a5e3ae6e25174cc4a9c092f4d3333b21,
         type: 3}
@@ -211,7 +211,7 @@ PrefabInstance:
     - target: {fileID: 1491124216590294429, guid: c18190be96cc211499722f5118468f5d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1491124216590294429, guid: c18190be96cc211499722f5118468f5d,
         type: 3}
@@ -296,7 +296,7 @@ PrefabInstance:
     - target: {fileID: 1491124216590294429, guid: c18190be96cc211499722f5118468f5d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1491124216590294429, guid: c18190be96cc211499722f5118468f5d,
         type: 3}
@@ -381,7 +381,7 @@ PrefabInstance:
     - target: {fileID: 15535758669160164, guid: a5e3ae6e25174cc4a9c092f4d3333b21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 15535758669160164, guid: a5e3ae6e25174cc4a9c092f4d3333b21,
         type: 3}
@@ -456,7 +456,7 @@ PrefabInstance:
     - target: {fileID: 1491124216590294429, guid: c18190be96cc211499722f5118468f5d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1491124216590294429, guid: c18190be96cc211499722f5118468f5d,
         type: 3}

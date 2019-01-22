@@ -24,10 +24,11 @@ public class Shield : MonoBehaviour
     void Update()
     {
 
-        
 
-        transform.position = ship.transform.position + new Vector3(7,0,0);
-
+        if (GameObject.Find("Spaceship") != null)
+        {
+            transform.position = ship.transform.position + new Vector3(7, 0, 0);
+        }
 
     }
 
