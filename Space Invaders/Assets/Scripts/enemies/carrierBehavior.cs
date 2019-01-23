@@ -15,7 +15,7 @@ public class carrierBehavior : MonoBehaviour
 
     public int bulletDelay;
 
-    int carrierHealth = 10;
+    int carrierHealth = 6;
 
     // Start is called before the first frame update
     void Start()

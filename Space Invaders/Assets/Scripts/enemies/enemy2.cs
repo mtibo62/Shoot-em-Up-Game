@@ -82,6 +82,17 @@ public class enemy2 : MonoBehaviour
 
     private void Update()
     {
+        //turn ship back to normal upon death
+        if (GameObject.Find("Spaceship") == null)
+        {
+            if (rotated == 1 && isHacked)
+            {
+                transform.Rotate(0, 0, 180);
+
+                StartCoroutine(ChangeAlienSprite());
+                rotated++;
+            }
+        }
 
         //this will not happen until an unhacked enemy is hit with a hack shot
         if (beginMove == true)
@@ -121,17 +132,7 @@ public class enemy2 : MonoBehaviour
         }
             
         
-        //turn ship back to normal upon death
-        if(GameObject.Find("Spaceship") == null)
-            {
-            if (rotated == 1 && isHacked)
-            {
-                transform.Rotate(0, 0, 180);
-                
-                StartCoroutine(ChangeAlienSprite());
-                rotated++;
-            }
-            }
+
     }
 
     

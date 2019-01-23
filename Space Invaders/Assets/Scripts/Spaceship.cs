@@ -230,7 +230,7 @@ public class Spaceship : MonoBehaviour
         }
 
         /////CHERCK IF SCORE IS CORRECT FOR HACK ABILITY////////
-        if (killStreak >= 10 && currentSpot < 6)
+        if (killStreak >= 5 && currentSpot < 6)
         {
             killStreak = 0;
             hackReady = true;
@@ -385,7 +385,7 @@ public class Spaceship : MonoBehaviour
     public IEnumerator deathScreenActivate()
     {
         
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
         deathScreen.setActive();
         Destroy(gameObject);
     }

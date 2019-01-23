@@ -55,12 +55,9 @@ public class enemyBullet2 : MonoBehaviour
 
         if (col.gameObject.tag == "Shield")
         {
+            Destroy(gameObject);
             Spaceship.numBullets++;
             Spaceship.IncreaseBulletAmountUI();
-
-           
-
-            Destroy(gameObject);
         }
 
 

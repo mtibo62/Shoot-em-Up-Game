@@ -45,13 +45,13 @@ public class enemySpawner : MonoBehaviour
         GameObject.Instantiate(carrierPattern1, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(3);
         GameObject.Instantiate(carrierPattern2, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(6);
-        GameObject.Instantiate(carrierPattern3, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(4);
+        //GameObject.Instantiate(carrierPattern3, transform.position, Quaternion.identity);
+        //yield return new WaitForSeconds(4);
         GameObject.Instantiate(carrierPattern4, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(5);
         GameObject.Instantiate(carrierPattern5, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(6);
 
 
 
