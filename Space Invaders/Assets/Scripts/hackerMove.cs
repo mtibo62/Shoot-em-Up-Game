@@ -39,14 +39,9 @@ public class hackerMove : MonoBehaviour
         {
             //Soundmanager.Instance.PlayOneShot(Soundmanager.Instance.alienDies);
 
-            
-
             //col.GetComponent<SpriteRenderer>().sprite = explodedAlienImage;
 
-            Destroy(gameObject);
-
-       
-
+            //Destroy(gameObject);
 
         }
 

@@ -23,15 +23,15 @@ public class notificationBehavior : MonoBehaviour
 
     IEnumerator blink()
     {
-        yield return new WaitForSeconds(.35f);
+        yield return new WaitForSeconds(.25f);
 
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0f);
 
-        yield return new WaitForSeconds(.35f);
+        yield return new WaitForSeconds(.25f);
 
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1f);
 
-        yield return new WaitForSeconds(.35f);
+        yield return new WaitForSeconds(.25f);
 
         Destroy(gameObject);
     }

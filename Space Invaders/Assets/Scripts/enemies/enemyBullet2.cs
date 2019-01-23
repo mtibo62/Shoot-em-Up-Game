@@ -44,7 +44,7 @@ public class enemyBullet2 : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             Destroy(gameObject);
-            if (Spaceship.health > 0)
+            if (Spaceship.health > 0 && !Spaceship.isHit)
             {
 
                 Spaceship.health--;

@@ -6,10 +6,10 @@ public class bossShooting : MonoBehaviour
 {
 
     //gets gameobject for the enemybullet1
-    public GameObject enemyBullet1;
+    public GameObject enemyBullet1Object;
 
     //gets gameobject for the enemybullet2
-    public GameObject enemyBullet2;
+    public GameObject enemyBullet2Object;
 
 
     // Start is called before the first frame update
@@ -31,26 +31,30 @@ public class bossShooting : MonoBehaviour
 
         while (bossAlien.bossHealth > 50)
         {
-            for (int i = 0; i < 1; i++)
+
+            enemyBullet1.speed = 80;
+            enemyBullet2.speed = 65;
+
+            for (int i = 0; i < 8; i++)
             {
-                Instantiate(enemyBullet2, transform.position, transform.rotation);
+                Instantiate(enemyBullet2Object, transform.position, transform.rotation);
                 yield return new WaitForSeconds(1f);
                 if (i % 3 == 0)
                 {
-                    Instantiate(enemyBullet1, transform.position, transform.rotation);
+                    Instantiate(enemyBullet1Object, transform.position, transform.rotation);
                     yield return new WaitForSeconds(1f);
                 }
 
 
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
-                Instantiate(enemyBullet1, transform.position, transform.rotation);
-                yield return new WaitForSeconds(.8f);
-
-                Instantiate(enemyBullet1, transform.position, transform.rotation);
+                Instantiate(enemyBullet1Object, transform.position, transform.rotation);
                 yield return new WaitForSeconds(.9f);
+
+                Instantiate(enemyBullet1Object, transform.position, transform.rotation);
+                yield return new WaitForSeconds(1f);
 
 
             }
@@ -65,25 +69,25 @@ public class bossShooting : MonoBehaviour
             {
                 if (!headShooter.headShoot)
                 {
-                    Instantiate(enemyBullet2, transform.position, transform.rotation);
+                    Instantiate(enemyBullet2Object, transform.position, transform.rotation);
                     yield return new WaitForSeconds(1f);
                     if (i % 3 == 0)
                     {
-                        Instantiate(enemyBullet1, transform.position, transform.rotation);
+                        Instantiate(enemyBullet1Object, transform.position, transform.rotation);
                         yield return new WaitForSeconds(1f);
                     }
 
                 }
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 if (!headShooter.headShoot)
                 {
-                    Instantiate(enemyBullet1, transform.position, transform.rotation);
+                    Instantiate(enemyBullet1Object, transform.position, transform.rotation);
                     yield return new WaitForSeconds(.8f);
 
-                    Instantiate(enemyBullet1, transform.position, transform.rotation);
+                    Instantiate(enemyBullet1Object, transform.position, transform.rotation);
                     yield return new WaitForSeconds(.9f);
                 }
 

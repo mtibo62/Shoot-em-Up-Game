@@ -5,10 +5,10 @@ using UnityEngine;
 public class headShooter : MonoBehaviour
 {
     //gets gameobject for the enemybullet1
-    public GameObject enemyBullet1;
+    public GameObject enemyBullet1Object;
 
     //gets gameobject for the enemybullet2
-    public GameObject enemyBullet2;
+    public GameObject enemyBullet2Object;
 
    
 
@@ -45,21 +45,25 @@ public class headShooter : MonoBehaviour
         while (bossAlien.bossHealth <= 50)
         {
             headShoot = true;
+
+            enemyBullet1.speed = 80;
+            enemyBullet2.speed = 80;
+
             yield return new WaitForSeconds(5f);
 
             for (int i = -30; i < 40; i++)
             {
                 vectorMove = i;
-                if (i <= -10 || i >= 5) { 
+                if (i <= -20 || (i > -15 && i <-5) || (i > 0 && i < 10 ) || (i > 15 && i < 25) || i > 30){ 
                 
-                Instantiate(enemyBullet1, transform.position, transform.rotation);
+                Instantiate(enemyBullet1Object, transform.position, transform.rotation);
                 yield return new WaitForSeconds(.08f);
                 }
 
-                else if (i > -10 && i < 5)
+                else if( (i > -20 && i <= -15) || (i >= -5 && i < 0) || (i >= 10 && i <15) || (i>=25 && i < 30))
                 {
 
-                    Instantiate(enemyBullet2, transform.position, transform.rotation);
+                    Instantiate(enemyBullet2Object, transform.position, transform.rotation);
                     yield return new WaitForSeconds(.08f);
                 }
 

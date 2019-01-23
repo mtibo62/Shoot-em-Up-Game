@@ -21,7 +21,7 @@ public class bossAlien : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bossHealth = 150;
+        bossHealth = 175;
         isAlive = true;
 
         rb = GetComponent<Rigidbody2D>();

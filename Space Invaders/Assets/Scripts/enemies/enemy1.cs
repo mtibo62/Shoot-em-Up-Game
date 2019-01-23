@@ -142,7 +142,7 @@ public class enemy1 : MonoBehaviour
 
         //enemy has hit the player, but this will only happen when the enemy is not hacked
         ///causes player to blink and enemy gets destroyed
-        if (col.tag == "Player" && isHacked != true)
+        if (col.tag == "Player" && isHacked != true && !Spaceship.isHit)
         {           
             Destroy(gameObject);
 
@@ -150,7 +150,7 @@ public class enemy1 : MonoBehaviour
         }
 
         //if enemy is hit with hacker shot they will be hacked and controled by player
-        if (col.tag == "hacker" && isHacked != true)
+        if (col.tag == "hacker" && isHacked != true  )
         {
             Debug.Log("isHit");
             if (Spaceship.currentSpot <= 5)
@@ -167,6 +167,8 @@ public class enemy1 : MonoBehaviour
                 {
                     Spaceship.currentSpot++;
                 }
+
+                Destroy(col.gameObject);
             }
         }
     }

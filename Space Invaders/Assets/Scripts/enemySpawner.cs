@@ -49,13 +49,13 @@ public class enemySpawner : MonoBehaviour
         //GameObject.Instantiate(carrierPattern3, transform.position, Quaternion.identity);
         //yield return new WaitForSeconds(4);
         GameObject.Instantiate(carrierPattern4, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
         GameObject.Instantiate(carrierPattern5, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(5);
 
 
 
-        while (Spaceship.score < 600)
+        while (Spaceship.score < 450)
         {
             int patternNum = Random.Range(1, 4);
 
@@ -72,7 +72,7 @@ public class enemySpawner : MonoBehaviour
 
                     Quaternion spawnRotation = Quaternion.identity;
                     GameObject.Instantiate(enemyPattern4, new Vector3(transform.position.x, Random.Range(-25, 16), 0), spawnRotation);
-                    yield return new WaitForSeconds(4f);
+                    yield return new WaitForSeconds(5f);
                 }
 
             }
@@ -115,7 +115,7 @@ public class enemySpawner : MonoBehaviour
 
                     Quaternion spawnRotation = Quaternion.identity;
                     GameObject.Instantiate(enemyPattern1, new Vector3(transform.position.x, Random.Range(-25, 16), 0), spawnRotation);
-                    yield return new WaitForSeconds(2);
+                    yield return new WaitForSeconds(3);
                 }
 
 
@@ -138,7 +138,7 @@ public class enemySpawner : MonoBehaviour
         {
 
              enemy2.speed = 25;
-             enemyBullet2.speed = 8;
+             enemyBullet2.speed = 65;
 
 
               Quaternion spawnRotation = Quaternion.identity;

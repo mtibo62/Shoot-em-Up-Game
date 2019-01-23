@@ -20,7 +20,7 @@ public class Spaceship : MonoBehaviour
     
     //determines if player has been hit by enemy
     //will make player slower and invulnerable for a short time
-    static private bool isHit;
+    static public bool isHit;
 
     //movement speed of ship
     public float speed;
@@ -83,6 +83,7 @@ public class Spaceship : MonoBehaviour
 
     static public bool bossDead;
 
+     
 
 
 
@@ -240,7 +241,7 @@ public class Spaceship : MonoBehaviour
 
 
         /////DESTROYS HEALTH ONJECT WHEN HIT/////
-        if (canRemoveHealth && currentHealthSpot <= 2)
+        if (canRemoveHealth && currentHealthSpot <= 2 && !isHit)
         {
             canRemoveHealth = false;
             Destroy(healthObject[currentHealthSpot]);
@@ -258,7 +259,7 @@ public class Spaceship : MonoBehaviour
         }
     }
 
-    //////////CRESTING BULLETS/////////////////
+    //////////CREATING BULLETS/////////////////
     //checks to see if there is enough ammo to shoot and will initialize either the bullets or the noAmmo sprites accordingly
     void bulletShoot()
     {
@@ -337,8 +338,9 @@ public class Spaceship : MonoBehaviour
     //spaceship collision with enemy that causes blinking to signifiy damage
     void OnTriggerEnter2D(Collider2D col)
     {
-        if ((col.tag == "carrier" || col.gameObject.tag == "AlienBullet" || col.gameObject.tag == "Alien"))
+        if (!isHit && (col.tag == "carrier" || col.gameObject.tag == "AlienBullet" || col.gameObject.tag == "Alien"))
         {
+            isHit = true;
             StartCoroutine(blink());
 
         }
@@ -350,7 +352,7 @@ public class Spaceship : MonoBehaviour
     public static IEnumerator blink()
     {
         //when this is true it will cause spaceship to move slower and become invaulnerable for a short epriod of time
-        isHit = true;
+        
 
         canRemoveHealth = true;
 
@@ -363,11 +365,11 @@ public class Spaceship : MonoBehaviour
 
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1f);
         Debug.Log("blink");
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(.25f);
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0f);
         Debug.Log("blink");
 
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(.25f);
 
         renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1f);
         Debug.Log("blink");

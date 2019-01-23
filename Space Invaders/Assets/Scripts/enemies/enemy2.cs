@@ -146,7 +146,7 @@ public class enemy2 : MonoBehaviour
 
         //enemy has hit the player, but this will only happen when the enemy is not hacked
         ///causes player to blink and enemy gets destroyed
-        if (col.tag == "Player" && isHacked != true)
+        if (col.tag == "Player" && isHacked != true && Spaceship.isHit)
         {
             
             Destroy(gameObject);
@@ -171,6 +171,8 @@ public class enemy2 : MonoBehaviour
                 {
                     Spaceship.currentSpot++;
                 }
+
+                Destroy(col.gameObject);
             }
         }
     }

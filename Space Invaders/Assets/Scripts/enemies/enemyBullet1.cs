@@ -42,14 +42,16 @@ public class enemyBullet1 : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" )
         {
+            
             Destroy(gameObject);
-            if (Spaceship.health > 0)
+            if (Spaceship.health > 0 && !Spaceship.isHit)
             {
-
+                
                 Spaceship.health--;
                 Debug.Log(Spaceship.health);
+                //Spaceship.isHit = true;
 
             }
         }
