@@ -3,32 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class enemyBullet1 : MonoBehaviour
-   
 {
     private Rigidbody2D rb;
 
-    public int speed = 30;
-
-
+    static public int speed;
 
     // Start is called before the first frame update
     void Start()
     {
+        speed = 65;
+
         rb = GetComponent<Rigidbody2D>();
 
         rb.velocity = Vector2.left * speed;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        rb.velocity = Vector2.left * speed;
+        //if (headShooter.headShoot)
+        //{
+        //    rb.velocity = new Vector3(speed * -1, headShooter.vectorMove, 0);
+        //}
+        //else{
+        //    rb.velocity = Vector2.left * speed;
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
 
-        if (col.tag == "Despawner")
+        if (col.tag == "despawner")
         {
             Destroy(gameObject);
         }

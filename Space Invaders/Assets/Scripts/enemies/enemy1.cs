@@ -6,7 +6,7 @@ public class enemy1 : MonoBehaviour
 {
     public static enemy1 Instance;
 
-    public int speed;
+    static public int speed;
 
     private Rigidbody2D rb;
 
@@ -46,6 +46,7 @@ public class enemy1 : MonoBehaviour
     void Start()
     {
         Instance = this;
+        speed = 25;
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -54,6 +55,8 @@ public class enemy1 : MonoBehaviour
         rb.velocity = Vector2.left * speed;
 
         StartCoroutine(spawnBullet());
+
+        
     }
 
     //methods used to instantiate the enemybulley
@@ -87,7 +90,7 @@ public class enemy1 : MonoBehaviour
             float step = moveSpeed * Time.deltaTime;
 
             //rb.velocity = Vector2.left * 0;
-            // move our position a step closer to the target.
+            // move our position a step closer to the target
             this.transform.position = Vector3.MoveTowards(this.transform.position, openSpot.position, 1);
 
 
@@ -160,7 +163,7 @@ public class enemy1 : MonoBehaviour
                 transform.gameObject.tag = "hacked";
                 StartCoroutine(ChangeAlienSprite());
 
-                if (Spaceship.currentSpot < 5)
+                if (Spaceship.currentSpot <= 5)
                 {
                     Spaceship.currentSpot++;
                 }

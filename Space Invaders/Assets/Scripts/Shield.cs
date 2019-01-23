@@ -27,7 +27,7 @@ public class Shield : MonoBehaviour
 
         if (GameObject.Find("Spaceship") != null)
         {
-            transform.position = ship.transform.position + new Vector3(7, 0, 0);
+            transform.position = ship.transform.position;
         }
 
     }

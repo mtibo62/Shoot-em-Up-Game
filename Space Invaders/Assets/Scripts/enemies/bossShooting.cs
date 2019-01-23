@@ -27,15 +27,15 @@ public class bossShooting : MonoBehaviour
     //methods used to instantiate the boss bullet
     IEnumerator spawnBullet()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
 
-        while (bossAlien.isAlive == true)
+        while (bossAlien.bossHealth > 50)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 1; i++)
             {
                 Instantiate(enemyBullet2, transform.position, transform.rotation);
                 yield return new WaitForSeconds(1f);
-                if(i % 3 == 0)
+                if (i % 3 == 0)
                 {
                     Instantiate(enemyBullet1, transform.position, transform.rotation);
                     yield return new WaitForSeconds(1f);
@@ -44,7 +44,7 @@ public class bossShooting : MonoBehaviour
 
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Instantiate(enemyBullet1, transform.position, transform.rotation);
                 yield return new WaitForSeconds(.8f);
@@ -52,6 +52,40 @@ public class bossShooting : MonoBehaviour
                 Instantiate(enemyBullet1, transform.position, transform.rotation);
                 yield return new WaitForSeconds(.9f);
 
+
+            }
+        }
+
+
+
+        while (bossAlien.bossHealth <= 50)
+        {
+            yield return new WaitForSeconds(1f);
+            for (int i = 0; i < 1; i++)
+            {
+                if (!headShooter.headShoot)
+                {
+                    Instantiate(enemyBullet2, transform.position, transform.rotation);
+                    yield return new WaitForSeconds(1f);
+                    if (i % 3 == 0)
+                    {
+                        Instantiate(enemyBullet1, transform.position, transform.rotation);
+                        yield return new WaitForSeconds(1f);
+                    }
+
+                }
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (!headShooter.headShoot)
+                {
+                    Instantiate(enemyBullet1, transform.position, transform.rotation);
+                    yield return new WaitForSeconds(.8f);
+
+                    Instantiate(enemyBullet1, transform.position, transform.rotation);
+                    yield return new WaitForSeconds(.9f);
+                }
 
             }
         }

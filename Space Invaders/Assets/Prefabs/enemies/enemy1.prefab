@@ -94,7 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c75a25cbf4e7a44d8352a78afa3d89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
   enemyBullet1: {fileID: 7096676041079867593, guid: 29b20010565e9a44ab65a47f5d42c468,
     type: 3}
   theBullet: {fileID: 6886062518200987131, guid: f878b9f38a110da4d9cb70b6cfe26d74,

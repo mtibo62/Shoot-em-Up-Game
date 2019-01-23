@@ -4,22 +4,33 @@ using UnityEngine;
 
 public class enemyBullet2 : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
-    public int speed;
+    static public int speed;
 
     // Start is called before the first frame update
     void Start()
     {
+        speed = 60;
+
         rb = GetComponent<Rigidbody2D>();
 
         rb.velocity = Vector2.left * speed;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //if (headShooter.headShoot)
+        //{
+        //    rb.velocity = new Vector3(speed * -1, headShooter.vectorMove, 0);
+        //}
+        //else
+        //{
+        //    rb.velocity = Vector2.left * speed;
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D col)

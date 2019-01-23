@@ -7,7 +7,7 @@ public class enemy2 : MonoBehaviour
     public static enemy2 Instance;
 
     //speed enemy will move at spawn
-    public int speed;
+    static public  int speed;
 
     private Rigidbody2D rb;
 
@@ -51,6 +51,7 @@ public class enemy2 : MonoBehaviour
     void Start()
     {
         Instance = this;
+        speed = 25;
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -60,6 +61,7 @@ public class enemy2 : MonoBehaviour
 
         StartCoroutine(spawnBullet());
 
+       
     }
 
     //methods used to instantiate the enemybulley
@@ -164,7 +166,7 @@ public class enemy2 : MonoBehaviour
                 transform.gameObject.tag = "hacked";
                 StartCoroutine(ChangeAlienSprite());
 
-                if (Spaceship.currentSpot < 5)
+                if (Spaceship.currentSpot <= 5)
                 {
                     Spaceship.currentSpot++;
                 }

@@ -32,17 +32,12 @@ public class Bullet : MonoBehaviour {
         if(col.tag == "Alien")
         {
             //Soundmanager.Instance.PlayOneShot(Soundmanager.Instance.alienDies);
-
+            Destroy(col.gameObject);
             Spaceship.IncreaseTestUIScore();
 
             //col.GetComponent<SpriteRenderer>().sprite = explodedAlienImage;
 
             Destroy(gameObject);
-
-            DestroyObject(col.gameObject);
-
-        
-
 
         }
 

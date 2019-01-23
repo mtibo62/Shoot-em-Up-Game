@@ -69,6 +69,8 @@ public class Spaceship : MonoBehaviour
 
     public deathScreen deathScreen;
 
+    public winScreen winScreen;
+
     public bool hackReady = false;
 
     public static int killStreak;
@@ -78,6 +80,8 @@ public class Spaceship : MonoBehaviour
     static int currentHealthSpot;
 
     static private bool canRemoveHealth;
+
+    static public bool bossDead;
 
 
 
@@ -99,9 +103,9 @@ public class Spaceship : MonoBehaviour
         killStreak = 0;
         currentHealthSpot = 0;
         canRemoveHealth = false;
-    
+        nextOpenSpot = hackedSpots[0];
+        bossDead = false;
 
-   
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -109,15 +113,8 @@ public class Spaceship : MonoBehaviour
         
         //sets the UI tesxt to the amount of bullets the player starts with
         var textUIComp = GameObject.Find("bulletAmount").GetComponent<Text>();
-        textUIComp.text = numBullets.ToString();
-
-        
-
-        nextOpenSpot = hackedSpots[0];
-        
+        textUIComp.text = numBullets.ToString();   
     }
-
-
 
 
     void FixedUpdate()
@@ -129,17 +126,20 @@ public class Spaceship : MonoBehaviour
 
         if (isHit == false)
         {
-            rb.velocity = new Vector2(horzMove * speed, vertMove * speed);
+            rb.velocity = new Vector2(horzMove *  speed, vertMove * speed);
         }
-        else{
-            
-            rb.velocity = new Vector2(horzMove * (speed/1.5f), vertMove * (speed/1.5f));
+        else
+        {
+
+            rb.velocity = new Vector2(horzMove * (speed / 1.5f), vertMove * (speed / 1.5f));
         }
 
-        nextOpenSpot = hackedSpots[currentSpot];
+        if (currentSpot <= 5)
+        { 
+            nextOpenSpot = hackedSpots[currentSpot];
+        }
 
-        
-        
+              
     }
 
 
@@ -198,7 +198,7 @@ public class Spaceship : MonoBehaviour
         {
             isButtonPressed = true;
 
-            Instantiate(shield, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
+            Instantiate(shield, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
         }
 
         //if(Input.GetButtonUp("Fire3") && Input.GetButtonUp("Fire1") && Input.GetButtonUp("Jump"))
@@ -213,22 +213,24 @@ public class Spaceship : MonoBehaviour
             {
                 Instantiate(hackBullet, new Vector3(transform.position.x + 7, transform.position.y, 0), Quaternion.identity);
                 hackReady = false;
-                 GameObject.Find("hackReadyText").GetComponent<Text>().text = "";
+                GameObject.Find("hackReadyText").GetComponent<Text>().text = "";
                 
             }
         }
 
 
         ////DEATH SCREEN////
-        if(health <= 0) { 
+        if(health <= 0) {
 
+            Destroy(GameObject.Find("hackready"));
+            Destroy(GameObject.Find("noammo"));
             //Destroy(gameObject);
-        StartCoroutine(deathScreenActivate());
+            StartCoroutine(deathScreenActivate());
             
         }
 
         /////CHERCK IF SCORE IS CORRECT FOR HACK ABILITY////////
-        if (killStreak >= 10)
+        if (killStreak >= 10 && currentSpot < 6)
         {
             killStreak = 0;
             hackReady = true;
@@ -244,6 +246,15 @@ public class Spaceship : MonoBehaviour
             Destroy(healthObject[currentHealthSpot]);
             currentHealthSpot++;
 
+        }
+
+        ///CHECKS TO SEE IF BOSS IS DEAD///
+        if (bossDead)
+        {
+            Destroy(GameObject.Find("hackready"));
+            Destroy(GameObject.Find("noammo"));
+            
+            StartCoroutine(winScreenActivate());
         }
     }
 
@@ -374,9 +385,17 @@ public class Spaceship : MonoBehaviour
     public IEnumerator deathScreenActivate()
     {
         
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(1);
         deathScreen.setActive();
         Destroy(gameObject);
     }
 
+    public IEnumerator winScreenActivate()
+    {
+
+        yield return new WaitForSeconds(1);
+        winScreen.setActive();
+        
+    }
 }
+
