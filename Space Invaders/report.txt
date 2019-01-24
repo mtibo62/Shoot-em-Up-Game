@@ -1,0 +1,47 @@
+In Space Brigade you play as a starship pilot who is defending their planet from the 
+strange alien race that has begun an attack. In your battle against the aliens, your 
+battleship is only supplied with a limited number of shots from the start. Luckily for 
+you, you are able to engage your handy shield that can absorb certain oncoming hazards 
+and be used as your own weapon! Your battleship is also equipped with state-of-the-art 
+hacking technology, which on occasion you will be able to fire at your enemy and gain 
+control of them. Giving you another teammate at your side. Will you be able to use your 
+arsenal effectively to fend off the opposing aliens? Or will they get the best of you 
+and destroy your only home?
+ 
+The controls of Space Brigade may seem rather complex at first, but over time you will 
+become familiar with them. You move with either W, A, S, D or R-Arrow, L-Arrow, 
+Up-Arrow, Down-Arrow. To fire your shot, you press the SPACE button. To engage you 
+shield, which only absorbs the shots from Blue Aliens, you press SHIFT. However, be 
+warned that you CANNOT fire bullets and have your shields engaged at the same time. 
+Every few kills you get against the aliens you will be able to fire a hacking shot 
+that will control an enemy alien and have them fight by your side. When displayed, to 
+fire a hacking shot press E. By the way, you can hack up to 6 aliens at a time. Also, 
+the bullets the hacked aliens shoot do not count towards your overall bullet amount.
+ 
+The development of Space Brigade was an extremely long and restless process, which 
+ultimately turned out to be a very fun and fulfilling experience. When I had first 
+begun working on the game Monday, January 14, I had little to no experience in Unity. 
+I had only previously dabbled in recreating very small project people had posted 
+tutorials on YouTube. So, when I was told to make a whole game by myself in the span 
+of about 10 days, it was safe to say that I was extremely stressed. I had no idea 
+or how to start. Thankfully for me, I had kept those previous projects I mentioned 
+and decided to build upon one of them. The starting project was an extremely basic 
+Space Invaders type game. With the only horizontal movement to the player and a few 
+rows of aliens slowly falling towards you. This alien theme gave me the idea to somehow 
+adapt it into a faster paced shoot ‘em up style game.  However, with such a basic idea 
+I knew I had to add a little something to it to spice up the gameplay. That’s when the 
+limited bullets and shield came into play, and eventually the hacking idea as well. 
+From the beginning, I had been creating all the art by myself and with it also being my 
+first time making my own pixel art I have to say I am very pleased with how most of 
+the sprites turned out.  Despite me being a Software Engineer major, getting familiar 
+with C# and Unity was pretty hard at first. And after dozens of hours of coding, 
+testing, and Googling I have to say I feel extremely comfortable with most of the 
+basic and intermediate stuff that can be done with Unity. All-in-all, while my project 
+may not be the most jaw-dropping of the ones being presented in class I have to say I 
+am extremely proud of what I have created in such a short time frame and with the little
+game-making knowledge I started out with. Also, when began the project I wasn’t 
+exactly sure what kind of strengths I would be able to present to the class. But 
+after the fact, I have learned that I not only have good coding knowledge, but I 
+will also be able to help with both art(depending on how detailed it is) and the 
+overall game design. Now that this project is done, I’m looking forward to seeing 
+what I can make next with Unity.

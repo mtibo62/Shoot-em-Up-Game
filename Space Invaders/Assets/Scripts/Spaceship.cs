@@ -75,11 +75,11 @@ public class Spaceship : MonoBehaviour
 
     public static int killStreak;
 
-    public GameObject[] healthObject;
+    //public GameObject[] healthObject;
 
     static int currentHealthSpot;
 
-    static private bool canRemoveHealth;
+    //static private bool canRemoveHealth;
 
     static public bool bossDead;
 
@@ -95,7 +95,7 @@ public class Spaceship : MonoBehaviour
         //initializing values of all static vars so when game is restarted everything will work correctly
         canShoot = true;
         isButtonPressed = false;
-        health = 3;
+        health = 5;
         score = 0;
         currentSpot = 0;
         amountHacked = 0;
@@ -103,7 +103,7 @@ public class Spaceship : MonoBehaviour
         numBullets = 100;
         killStreak = 0;
         currentHealthSpot = 0;
-        canRemoveHealth = false;
+        //canRemoveHealth = false;
         nextOpenSpot = hackedSpots[0];
         bossDead = false;
 
@@ -241,13 +241,13 @@ public class Spaceship : MonoBehaviour
 
 
         /////DESTROYS HEALTH ONJECT WHEN HIT/////
-        if (canRemoveHealth && currentHealthSpot <= 2 && !isHit)
-        {
-            canRemoveHealth = false;
-            Destroy(healthObject[currentHealthSpot]);
-            currentHealthSpot++;
+        //if (canRemoveHealth && currentHealthSpot <= 2 && !isHit)
+        //{
+        //    canRemoveHealth = false;
+        //    Destroy(healthObject[currentHealthSpot]);
+        //    currentHealthSpot++;
 
-        }
+        //}
 
         ///CHECKS TO SEE IF BOSS IS DEAD///
         if (bossDead)
@@ -354,7 +354,7 @@ public class Spaceship : MonoBehaviour
         //when this is true it will cause spaceship to move slower and become invaulnerable for a short epriod of time
         
 
-        canRemoveHealth = true;
+        //canRemoveHealth = true;
 
         
 
